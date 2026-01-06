@@ -35,8 +35,11 @@ src/
 │   └── RGBStrategy.java              (Strategy)
 ├── characters/
 │   ├── GriffendorStudent.java
+│   ├── HufflepuffStudent.java
 │   ├── LarryPotter.java
-│   └── SlytherinStudent.java      
+│   ├── RavenClaw.java
+│   ├── SlytherinStudent.java  
+│   └── Student.java    
 ├── factory/
 │   └── StudentFactory.java           (Factory)
 ├── game/
