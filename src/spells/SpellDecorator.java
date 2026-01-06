@@ -1,19 +1,20 @@
 package spells;
 
-public class LoudSpellDecorator extends SpellDecorator {
+public abstract class SpellDecorator implements Spell {
 
-    public LoudSpellDecorator(Spell spell) {
-        super(spell);
+    protected Spell decoratedSpell;
+
+    public SpellDecorator(Spell spell) {
+        this.decoratedSpell = spell;
     }
 
     @Override
     public void cast() {
-        super.cast(); // call original spell
-        System.out.println("✨ The spell echoes loudly!");
+        decoratedSpell.cast(); // default behavior: delegate to the wrapped spell
     }
 
     @Override
     public String getName() {
-        return super.getName() + " (Loud)";
+        return decoratedSpell.getName(); // default: delegate to wrapped spell
     }
 }

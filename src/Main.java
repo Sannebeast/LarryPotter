@@ -3,6 +3,7 @@ import factory.*;
 import game.*;
 import spells.Spell;
 import structural.SpellAdapter;
+import spells.LoudSpellDecorator;
 
 public class Main {
 
@@ -22,5 +23,10 @@ public class Main {
         }
 
         game.endGame();
+        Spell oldSpell = new SpellAdapter("Expelliarmus");
+        Spell loudSpell = new LoudSpellDecorator(oldSpell);
+
+        loudSpell.cast();
+        System.out.println(loudSpell.getName());
     }
 }
