@@ -7,8 +7,20 @@ Make a Harry Potter related game that allows students from different houses figh
 
 ## Team Members & Cooperation
 
-**Student A:** *[Naïmi de Jong]*  
-**Student B:** *[Sanne Jimkes]*  
+**Student A:**  
+- Name: *[Naïmi de Jong]*  
+- Responsibilities:
+  - Singleton pattern (`HogwartsGame`)
+  - Factory pattern (`StudentFactory`)
+  - Characters (`GriffendorStudent`, `LarryPotter`, `SlytherinStudent`)
+
+**Student B:** 
+- Name: *[Sanne Jimkes]*  
+- Responsibilities:
+  - Strategy pattern (`RGBStrategy`)
+  - Observer pattern (Ministry of Magic observers)
+  - Decorator pattern (spell enhancements)
+  - Adapter pattern (spell sound integration)
 
 The project is developed collaboratively.  
 Responsibilities are divided by design pattern groups to ensure balanced contributions.
