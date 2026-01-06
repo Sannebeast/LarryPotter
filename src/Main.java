@@ -4,6 +4,7 @@ import game.HogwartsGame;
 import spells.Spell;
 import spells.LoudSpellDecorator;
 import structural.SpellAdapter;
+import behavioural.GameEventObserver;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -15,84 +16,116 @@ public class Main {
         HogwartsGame game = HogwartsGame.getInstance();
         game.startGame();
 
+        // Add observer
+        GameEventObserver ministry = new GameEventObserver("Ministry of Magic");
+        game.addObserver(ministry);
+
         Scanner scanner = new Scanner(System.in);
         Random rand = new Random();
 
-        // Choose player
-        System.out.println("Choose your student: LARRY, GRYFFINDOR, SLYTHERIN, RAVENCLAW, HUFFLEPUFF");
-        String playerChoice = scanner.nextLine().toUpperCase();
-        Student player = StudentFactory.createStudent(playerChoice);
+        boolean playAgain = true;
 
-        // Choose enemy
-        System.out.println("Choose the enemy student: LARRY, GRYFFINDOR, SLYTHERIN, RAVENCLAW, HUFFLEPUFF");
-        String enemyChoice = scanner.nextLine().toUpperCase();
-        Student enemy = StudentFactory.createStudent(enemyChoice);
+        while (playAgain) {
 
-        // Create spells
-        Spell fireball = new SpellAdapter("Fireball");            // Adapter
-        Spell loudFireball = new LoudSpellDecorator(fireball);    // Decorator
+            // Choose player
+            System.out.println("\nChoose your student: LARRY, GRYFFINDOR, SLYTHERIN, RAVENCLAW, HUFFLEPUFF");
+            String playerChoice = scanner.nextLine().toUpperCase();
+            Student player = StudentFactory.createStudent(playerChoice);
 
-        System.out.println("\nLet the duel begin!\n");
+            // Choose enemy
+            System.out.println("Choose the enemy student: LARRY, GRYFFINDOR, SLYTHERIN, RAVENCLAW, HUFFLEPUFF");
+            String enemyChoice = scanner.nextLine().toUpperCase();
+            Student enemy = StudentFactory.createStudent(enemyChoice);
 
-        // Duel loop
-        while (player.isAlive() && enemy.isAlive()) {
+            // Create spells
+            Spell fireball = new SpellAdapter("Fireball");            // Adapter
+            Spell loudFireball = new LoudSpellDecorator(fireball);    // Decorator
 
-            // Show health
-            player.printHealthBar();
-            enemy.printHealthBar();
+            System.out.println("\nLet the duel begin!\n");
 
-            // Player turn
-            System.out.println("\nYour turn! Choose an action:");
-            System.out.println("1: Basic Attack");
-            System.out.println("2: Cast Fireball");
-            System.out.println("3: Cast Loud Fireball");
-            System.out.println("4: Heal 10 HP");
+            // Duel loop
+            while (player.isAlive() && enemy.isAlive()) {
 
-            int action = scanner.nextInt();
+                // Player turn
+                System.out.println("\nYour turn! Choose an action:");
+                System.out.println("1: Basic Attack");
+                System.out.println("2: Cast Fireball");
+                System.out.println("3: Cast Loud Fireball");
+                System.out.println("4: Heal 10 HP");
 
-            switch(action) {
-                case 1 -> player.attack(enemy);
-                case 2 -> {
-                    fireball.cast();
-                    enemy.takeDamage(15);
+                int action = -1;
+                try {
+                    action = Integer.parseInt(scanner.nextLine());
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input! Try again.");
+                    continue;
                 }
-                case 3 -> {
-                    loudFireball.cast();
-                    enemy.takeDamage(20);
+
+                switch(action) {
+                    case 1 -> {
+                        player.attack(enemy);
+                        printHealth(player, enemy);
+                    }
+                    case 2 -> {
+                        fireball.cast();
+                        enemy.takeDamage(15);
+                        printHealth(player, enemy);
+                    }
+                    case 3 -> {
+                        loudFireball.cast();
+                        enemy.takeDamage(20);
+                        printHealth(player, enemy);
+                    }
+                    case 4 -> {
+                        player.heal(10);
+                        printHealth(player, enemy);
+                    }
+                    default -> System.out.println("Invalid action! Choose 1-4.");
                 }
-                case 4 -> player.heal(10);
-                default -> System.out.println("Invalid action!");
+
+                if (!enemy.isAlive()) break;
+
+                // Enemy turn
+                System.out.println("\nEnemy's turn...");
+                int enemyAction = rand.nextInt(3); // 0: attack, 1: fireball, 2: heal
+                switch(enemyAction) {
+                    case 0 -> {
+                        enemy.attack(player);
+                        printHealth(player, enemy);
+                    }
+                    case 1 -> {
+                        fireball.cast();
+                        player.takeDamage(20);
+                        printHealth(player, enemy);
+                    }
+                    case 2 -> {
+                        enemy.heal(10);
+                        printHealth(player, enemy);
+                    }
+                }
             }
 
-            if (!enemy.isAlive()) break;
+            // Game over
+            System.out.println("\n--- Duel Over ---");
+            if (!player.isAlive()) System.out.println("💀 You lost! Better luck next time.");
+            else System.out.println("🏆 You won the duel!");
 
-            // Enemy turn
-            System.out.println("\nEnemy's turn...");
-            int enemyAction = rand.nextInt(3);
-            // 0: attack, 1: fireball, 2: heal
-            switch(enemyAction) {
-                case 0 -> enemy.attack(player);
-                case 1 -> {
-                    fireball.cast();
-                    player.takeDamage(20);
-                }
-                case 2 -> enemy.heal(10);
-            }
+            // Replay option
+            System.out.println("Play again? (yes/no)");
+            String again = scanner.nextLine().trim();
+            playAgain = again.equalsIgnoreCase("yes");
         }
 
-        // Game over
-        System.out.println("\n--- Duel Over ---");
-        if (!player.isAlive()) System.out.println("💀 You lost! Better luck next time.");
-        else System.out.println("🏆 You won the duel!");
+        // End game
+        game.endGame();
+        scanner.close();
+    }
 
-        // Replay option
-        System.out.println("Play again? (yes/no)");
-        scanner.nextLine();
-        String again = scanner.nextLine();
-        if (again.equalsIgnoreCase("yes")) main(null);
-        else {
-            game.endGame();
-            scanner.close();
-        }
+    // Helper method to print health bars cleanly
+    private static void printHealth(Student player, Student enemy) {
+        System.out.println();
+        player.printHealthBar();
+        enemy.printHealthBar();
+        System.out.println();
     }
 }
