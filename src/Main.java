@@ -1,3 +1,4 @@
+import behavioural.RGBStrategy;
 import characters.*;
 import factory.*;
 import game.*;
