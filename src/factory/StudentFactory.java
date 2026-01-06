@@ -12,6 +12,10 @@ public class StudentFactory {
                 return new GriffendorStudent();
             case "SLYTHERIN":
                 return new SlytherinStudent();
+            case "RAVENCLAW":
+                return new RavenClawStudent();
+            case "HUFFLEPUFF":
+                return new HufflepuffStudent();
             default:
                 throw new IllegalArgumentException("Unknown student type");
         }

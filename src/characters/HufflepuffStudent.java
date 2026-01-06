@@ -2,17 +2,17 @@ package characters;
 
 import java.util.Random;
 
-public class GriffendorStudent extends Student {
+public class HufflepuffStudent extends Student {
 
     private Random rand = new Random();
 
-    public GriffendorStudent() {
-        super("Gryffindor Student");
+    public HufflepuffStudent() {
+        super("Hufflepuff Student");
     }
 
     @Override
     public void attack(Student opponent) {
-        int damage = 5 + rand.nextInt(26); // 5-30 damage
+        int damage = rand.nextInt(36); // 0-35 damage
         System.out.println(name + " casts a brave spell!");
         opponent.takeDamage(15);
     }

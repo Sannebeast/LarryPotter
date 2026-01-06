@@ -8,17 +8,36 @@ public abstract class Student {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
     public void takeDamage(int damage) {
         health -= damage;
+        if (health < 0) health = 0;
         System.out.println(name + " takes " + damage + " damage. HP: " + health);
+    }
+
+    public void heal(int amount) {
+        health += amount;
+        if (health > 100) health = 100;
+        System.out.println(name + " heals " + amount + " HP. Current HP: " + health);
     }
 
     public boolean isAlive() {
         return health > 0;
     }
 
-    public String getName() {
-        return name;
+    public void printHealthBar() {
+        int bars = health / 10;
+        System.out.print(name + " HP: [");
+        for (int i = 0; i < bars; i++) System.out.print("|");
+        for (int i = bars; i < 10; i++) System.out.print(" ");
+        System.out.println("] " + health + "/100");
     }
 
     public abstract void attack(Student opponent);
