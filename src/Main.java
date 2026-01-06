@@ -1,6 +1,8 @@
 import characters.*;
 import factory.*;
 import game.*;
+import spells.Spell;
+import structural.SpellAdapter;
 
 public class Main {
 
