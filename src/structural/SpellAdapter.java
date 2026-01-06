@@ -1,6 +1,7 @@
 package structural;
 
 import spells.Spell;
+// Adapter pattern: Allows AncientBook to be used for modern Spell interface
 
 // Legacy spell class (old system)
 class AncientBook {
