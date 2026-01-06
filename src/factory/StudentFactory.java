@@ -1,3 +1,7 @@
+package factory;
+
+import characters.*;
+
 public class StudentFactory {
 
     public static Student createStudent(String type) {

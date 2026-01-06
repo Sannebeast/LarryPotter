@@ -1,3 +1,5 @@
+package characters;
+
 public abstract class Student {
     protected String name;
     protected int health = 100;

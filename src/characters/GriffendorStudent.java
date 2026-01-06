@@ -1,3 +1,5 @@
+package characters;
+
 public class GriffendorStudent extends Student {
 
     public GriffendorStudent() {

@@ -1,3 +1,5 @@
+package characters;
+
 public class SlytherinStudent extends Student {
 
     public SlytherinStudent() {
