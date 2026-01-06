@@ -1,5 +1,6 @@
 package structural;
 
+import game.HogwartsGame;
 import spells.Spell;
 // Adapter pattern: Allows AncientBook to be used for modern Spell interface
 
@@ -24,6 +25,10 @@ public class SpellAdapter implements Spell {
     @Override
     public void cast() {
         ancientBook.useSpell(spellName);
+        // Notify observers
+        HogwartsGame.getInstance().notifyObservers(
+                spellName + " was cast using AncientBook!"
+        );
     }
 
     @Override
