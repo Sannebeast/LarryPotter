@@ -1,5 +1,6 @@
 package spells;
 
+// Decorator pattern: allows enhancing any Spell object dynamically without changing its original code
 public abstract class SpellDecorator implements Spell {
 
     protected Spell decoratedSpell;
@@ -10,11 +11,11 @@ public abstract class SpellDecorator implements Spell {
 
     @Override
     public void cast() {
-        decoratedSpell.cast(); // default behavior: delegate to the wrapped spell
+        decoratedSpell.cast();
     }
 
     @Override
     public String getName() {
-        return decoratedSpell.getName(); // default: delegate to wrapped spell
+        return decoratedSpell.getName();
     }
 }
