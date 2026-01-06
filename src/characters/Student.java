@@ -17,5 +17,9 @@ public abstract class Student {
         return health > 0;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public abstract void attack(Student opponent);
 }
