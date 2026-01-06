@@ -1,4 +1,5 @@
 package characters;
+import game.HogwartsGame;
 
 public abstract class Student {
     protected String name;
@@ -20,12 +21,22 @@ public abstract class Student {
         health -= damage;
         if (health < 0) health = 0;
         System.out.println(name + " takes " + damage + " damage. HP: " + health);
+
+        // Notify observers
+        HogwartsGame.getInstance().notifyObservers(
+                name + " took " + damage + " damage! HP: " + health
+        );
     }
 
     public void heal(int amount) {
         health += amount;
         if (health > 100) health = 100;
         System.out.println(name + " heals " + amount + " HP. Current HP: " + health);
+
+        // Notify observers
+        HogwartsGame.getInstance().notifyObservers(
+                name + " healed " + amount + " HP. Current HP: " + health
+        );
     }
 
     public boolean isAlive() {
