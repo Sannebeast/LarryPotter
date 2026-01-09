@@ -99,3 +99,12 @@ Defines a one-to-many dependency where observers are notified automatically when
 In our game, the `GameEventObserver` listens for important events such as duels or spell usage and reacts accordingly (e.g., notifying the Ministry of Magic).  
 This decouples event generation from event handling logic.
 
+## UML Class Diagrams
+
+Class diagrams are included to illustrate the structure and relationships of the implemented design patterns.
+
+- `uml/strategy.png`
+- `uml/observer.png`
+- `uml/decorator.png`
+- `uml/adapter.png`
+- `uml/factory.png`
