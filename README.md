@@ -1,4 +1,5 @@
 # Hogwarts RPG Game (Console-Based)
+Github: https://github.com/Sannebeast/LarryPotter/tree/main
 
 ## Project Idea
 Make a Harry Potter related game that allows students from different houses fight against each other.
