@@ -4,12 +4,25 @@ import characters.Student;
 import characters.LarryPotter;
 import characters.SlytherinStudent;
 import characters.GriffendorStudent;
+import characters.HufflepuffStudent;
+import characters.RavenClawStudent;
+import game.HogwartsGame;
 
 // Strategy pattern: defines a duel behavior that can be swapped with other strategies in the future
 
-public class RGBStrategy {
+public class RGBStrategy implements DuelStrategy {
     // Defines the duel behavior between two wizards
-    public void duel(characters.Student attacker, characters.Student defender) {
-        System.out.println(attacker.getName() + " casts a colorful RGB spell at " + defender.getName() + "!");
+    @Override
+    public void duel(Student attacker, Student defender, String spellName) {
+        String event =
+                attacker.getName() +
+                        " casts a colorful RGB " +
+                        spellName +
+                        " at " +
+                        defender.getName() +
+                        "!";
+
+        // Notify observers instead of printing
+        HogwartsGame.getInstance().notifyObservers(event);
     }
 }

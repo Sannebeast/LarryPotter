@@ -5,6 +5,7 @@ import spells.Spell;
 import spells.LoudSpellDecorator;
 import structural.SpellAdapter;
 import behavioural.GameEventObserver;
+import behavioural.RGBStrategy;
 
 import java.util.Random;
 import java.util.Scanner;
@@ -14,6 +15,7 @@ public class Main {
     public static void main(String[] args) {
 
         HogwartsGame game = HogwartsGame.getInstance();
+        game.setDuelStrategy(new RGBStrategy());
         game.startGame();
 
         // Add observer
@@ -64,15 +66,18 @@ public class Main {
                 switch(action) {
                     case 1 -> {
                         player.attack(enemy);
+                        game.performDuel(player, enemy, "Basic attackL");
                         printHealth(player, enemy);
                     }
                     case 2 -> {
                         fireball.cast();
+                        game.performDuel(player, enemy, "Fireball");
                         enemy.takeDamage(15);
                         printHealth(player, enemy);
                     }
                     case 3 -> {
                         loudFireball.cast();
+                        game.performDuel(player, enemy, "Loud Fireball");
                         enemy.takeDamage(20);
                         printHealth(player, enemy);
                     }
@@ -91,10 +96,12 @@ public class Main {
                 switch(enemyAction) {
                     case 0 -> {
                         enemy.attack(player);
+                        game.performDuel(player, enemy, "Basic attack");
                         printHealth(player, enemy);
                     }
                     case 1 -> {
                         fireball.cast();
+                        game.performDuel(player, enemy, "Fireball");
                         player.takeDamage(20);
                         printHealth(player, enemy);
                     }

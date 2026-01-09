@@ -1,13 +1,15 @@
 package game;
 
 import behavioural.GameEventObserver;
+import behavioural.DuelStrategy;
+import characters.Student;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HogwartsGame {
 
     private static HogwartsGame instance;
-
+    private DuelStrategy duelStrategy;
     // List of observers
     private List<GameEventObserver> observers = new ArrayList<>();
 
@@ -43,6 +45,16 @@ public class HogwartsGame {
     public void notifyObservers(String event) {
         for (GameEventObserver observer : observers) {
             observer.notify(event);
+        }
+    }
+
+    public void setDuelStrategy(DuelStrategy duelStrategy) {
+        this.duelStrategy = duelStrategy;
+    }
+
+    public void performDuel(Student attacker, Student defender, String spellName) {
+        if (duelStrategy != null) {
+            duelStrategy.duel(attacker, defender, spellName);
         }
     }
 }

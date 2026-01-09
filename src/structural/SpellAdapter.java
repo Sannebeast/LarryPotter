@@ -7,7 +7,7 @@ import spells.Spell;
 // Legacy spell class (old system)
 class AncientBook {
     public void useSpell(String spellName) {
-        System.out.println("Ancient book casts: " + spellName);
+
     }
 }
 

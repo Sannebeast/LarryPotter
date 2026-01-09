@@ -20,7 +20,6 @@ public abstract class Student {
     public void takeDamage(int damage) {
         health -= damage;
         if (health < 0) health = 0;
-        System.out.println(name + " takes " + damage + " damage. HP: " + health);
 
         // Notify observers
         HogwartsGame.getInstance().notifyObservers(
@@ -31,7 +30,6 @@ public abstract class Student {
     public void heal(int amount) {
         health += amount;
         if (health > 100) health = 100;
-        System.out.println(name + " heals " + amount + " HP. Current HP: " + health);
 
         // Notify observers
         HogwartsGame.getInstance().notifyObservers(

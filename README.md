@@ -12,7 +12,7 @@ Make a Harry Potter related game that allows students from different houses figh
 - Responsibilities:
   - Singleton pattern (`HogwartsGame`)
   - Factory pattern (`StudentFactory`)
-  - Characters (`GriffendorStudent`, `LarryPotter`, `SlytherinStudent`)
+  - Characters (`GriffendorStudent`,`HufflepuffStudent`, `LarryPotter`, `RavenClawStudent`, `SlytherinStudent`)
 
 **Student B:** 
 - Name: *[Sanne Jimkes]*  
@@ -27,10 +27,11 @@ Responsibilities are divided by design pattern groups to ensure balanced contrib
 
 ---
 
-## Planned Project Structure
+## Project Structure
 ```
 src/
 ├── behavioural/
+│   ├── DuelStrategy.java        
 │   ├── GameEventObserver.java        (Observer)
 │   └── RGBStrategy.java              (Strategy)
 ├── characters/
@@ -62,13 +63,13 @@ The following design patterns are planned for this project. They were chosen to 
 
 **Singleton**  
 Ensures that only one instance of the game controller exists during runtime.  
-In our game, this pattern is used for the main game class (`HogwartsGame`) which manages the game flow and overall state.  
-This was chosen to avoid multiple game instances running at the same time and to provide a single point of control.
+In our game, this pattern is implemented in the `HogwartsGame` class, which manages the game flow and overall game state.  
+This ensures that only one game instance is active at any time and provides a single point of control.
 
 **Factory**  
 Encapsulates object creation and hides concrete class instantiation from the client.  
-In our game, the `StudentFactory` will be responsible for creating different wizard types (e.g., student wizard, dark wizard).  
-This was chosen to simplify wizard creation and allow new wizard types to be added without modifying existing game logic.
+In our game, the `StudentFactory` is responsible for creating different student types such as Gryffindor, Slytherin, and Ravenclaw students.  
+This pattern simplifies student creation and allows new student types to be added without modifying existing game logic.
 
 ---
 
@@ -80,9 +81,9 @@ In our game, spells can be enhanced with additional effects (such as increased p
 This was chosen to avoid creating many subclasses for every possible spell variation.
 
 **Adapter**  
-Converts the interface of a class into another interface that the client expects.
-In our game, the SpellBookAdapter allows legacy spells from an old spell book (which uses a useSpell() method) to be used as regular spells through the Spell interface (cast()).
-This was chosen to integrate legacy or external spell systems without modifying existing code and to keep the modern spell system consistent.
+Converts the interface of a class into another interface that the client expects.  
+In our game, the `SpellAdapter` allows spells with incompatible interfaces to be used through the standard `Spell` interface.  
+This makes it possible to integrate legacy or external spell implementations without modifying existing code.
 
 ---
 
@@ -90,11 +91,11 @@ This was chosen to integrate legacy or external spell systems without modifying 
 
 **Strategy**  
 Defines a family of algorithms and makes them interchangeable at runtime.  
-In our game, different duel strategies can be selected dynamically, allowing wizards to duel in different ways without changing their classes.  
-This was chosen to make duel behavior flexible and easily extendable.
+In our game, the `RGBStrategy` determines how spell effects or visual feedback are handled during duels.  
+This allows different strategies to be selected dynamically without changing the core game logic.
 
 **Observer**  
 Defines a one-to-many dependency where observers are notified automatically when a subject changes state.  
-In our game, important events (such as duels or spell usage) will notify observers like the Ministry of Magic.  
-This was chosen to decouple game events from the systems that react to them.
+In our game, the `GameEventObserver` listens for important events such as duels or spell usage and reacts accordingly (e.g., notifying the Ministry of Magic).  
+This decouples event generation from event handling logic.
 
