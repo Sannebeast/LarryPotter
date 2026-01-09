@@ -66,7 +66,7 @@ public class Main {
                 switch(action) {
                     case 1 -> {
                         player.attack(enemy);
-                        game.performDuel(player, enemy, "Basic attackL");
+                        game.performDuel(player, enemy, "Basic attack");
                         printHealth(player, enemy);
                     }
                     case 2 -> {

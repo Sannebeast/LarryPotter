@@ -108,3 +108,5 @@ Class diagrams are included to illustrate the structure and relationships of the
 - `uml/decorator.png`
 - `uml/adapter.png`
 - `uml/factory.png`
+- `uml/singleton.png`
+- `uml/fullClassDiagram.png`

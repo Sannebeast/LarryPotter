@@ -1,11 +1,6 @@
 package behavioural;
 
 import characters.Student;
-import characters.LarryPotter;
-import characters.SlytherinStudent;
-import characters.GriffendorStudent;
-import characters.HufflepuffStudent;
-import characters.RavenClawStudent;
 import game.HogwartsGame;
 
 // Strategy pattern: defines a duel behavior that can be swapped with other strategies in the future

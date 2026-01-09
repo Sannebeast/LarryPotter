@@ -10,7 +10,6 @@ public class HogwartsGame {
 
     private static HogwartsGame instance;
     private DuelStrategy duelStrategy;
-    // List of observers
     private List<GameEventObserver> observers = new ArrayList<>();
 
     private HogwartsGame() {}
@@ -36,22 +35,19 @@ public class HogwartsGame {
         observers.add(observer);
     }
 
-    // Remove observer
-    public void removeObserver(GameEventObserver observer) {
-        observers.remove(observer);
-    }
-
-    // Notify all observers about an event
+    // Notify observer about an event
     public void notifyObservers(String event) {
         for (GameEventObserver observer : observers) {
             observer.notify(event);
         }
     }
 
+    // Setting strategy
     public void setDuelStrategy(DuelStrategy duelStrategy) {
         this.duelStrategy = duelStrategy;
     }
 
+    // Checking if there is a strategy and then calling duel
     public void performDuel(Student attacker, Student defender, String spellName) {
         if (duelStrategy != null) {
             duelStrategy.duel(attacker, defender, spellName);
