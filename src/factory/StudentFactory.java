@@ -1,0 +1,23 @@
+package factory;
+
+import characters.*;
+
+public class StudentFactory {
+
+    public static Student createStudent(String type) {
+        switch (type.toUpperCase()) {
+            case "LARRY":
+                return new LarryPotter();
+            case "GRYFFINDOR":
+                return new GriffendorStudent();
+            case "SLYTHERIN":
+                return new SlytherinStudent();
+            case "RAVENCLAW":
+                return new RavenClawStudent();
+            case "HUFFLEPUFF":
+                return new HufflepuffStudent();
+            default:
+                throw new IllegalArgumentException("Unknown student type");
+        }
+    }
+}
