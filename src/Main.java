@@ -76,8 +76,8 @@ public class Main {
 
                 switch(action) {
                     case 1 -> {
-                        player.attack(enemy);
                         game.performDuel(player, enemy, "Basic attack");
+                        player.attack(enemy);
                         printHealth(player, enemy);
                     }
                     case 2 -> {
@@ -106,13 +106,13 @@ public class Main {
                 int enemyAction = rand.nextInt(3); // 0: attack, 1: fireball, 2: heal
                 switch(enemyAction) {
                     case 0 -> {
+                        game.performDuel(enemy, player,"Basic attack");
                         enemy.attack(player);
-                        game.performDuel(player, enemy, "Basic attack");
                         printHealth(player, enemy);
                     }
                     case 1 -> {
                         fireball.cast();
-                        game.performDuel(player, enemy, "Fireball");
+                        game.performDuel(enemy, player,"Fireball");
                         player.takeDamage(20);
                         printHealth(player, enemy);
                     }

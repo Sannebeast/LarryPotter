@@ -39,14 +39,21 @@ src/
 │   ├── GriffendorStudent.java
 │   ├── HufflepuffStudent.java
 │   ├── LarryPotter.java
-│   ├── RavenClaw.java
+│   ├── RavenclawStudent.java
 │   ├── SlytherinStudent.java  
 │   └── Student.java    
 ├── factory/
-│   └── StudentFactory.java           (Factory)
+│   ├── FactoryProvider.java           (Factory)
+│   ├── GriffendorFactory.java
+│   ├── HufflepuffFactory.java
+│   ├── LarryPotterFactory.java
+│   ├── RavenclawFactory.java
+│   ├── SlytherinFactory.java
+│   └── StudentFactory.java
 ├── game/
 │   └── HogwartsGame.java             (Singleton)
 ├── spells/
+│   ├── LoudSpellDecorator.java
 │   ├── Spell.java
 │   └── SpellDecorator.java           (Decorator)
 ├── structural/

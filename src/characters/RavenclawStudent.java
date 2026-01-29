@@ -2,11 +2,11 @@ package characters;
 
 import java.util.Random;
 
-public class RavenClawStudent extends Student {
+public class RavenclawStudent extends Student {
 
     private Random rand = new Random();
 
-    public RavenClawStudent() {
+    public RavenclawStudent() {
         super("RavenClaw Student");
     }
 
