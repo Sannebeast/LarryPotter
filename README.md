@@ -69,9 +69,11 @@ This ensures that only one game instance is active at any time and provides a si
 ![Strategy Diagram](uml/singleton.png)
 
 **Factory**  
-Encapsulates object creation and hides concrete class instantiation from the client.  
-In our game, the `StudentFactory` is responsible for creating different student types such as Gryffindor, Slytherin, and Ravenclaw students.  
-This pattern simplifies student creation and allows new student types to be added without modifying existing game logic.
+The Factory Method pattern is used to create objects without the main program needing to know the exact class being created. Object creation is delegated to factory classes, while the game logic works with a common Student interface.
+
+In the game, StudentFactory defines how student objects are created, and each concrete factory is responsible for instantiating a specific type of student (such as Gryffindor or Slytherin). A factory provider is used to select the appropriate factory based on the player’s choice, keeping this logic separate from the game code.
+
+This approach makes the system easier to extend, as new student types can be added by introducing new factory classes without modifying existing game logic.
 ![Strategy Diagram](uml/factory.png)
 
 ---
@@ -109,5 +111,7 @@ This decouples event generation from event handling logic.
 ## Full UML Class Diagram
 
 This is our Full Class Diagram
+![Full Class Diagram](uml/newFullClassDiagram.png)
 
+this was our old one with the Simple factoryc (keeping it here since its more readable)
 ![Full Class Diagram](uml/fullClassDiagram.png)
