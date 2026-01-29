@@ -1,23 +1,14 @@
 package factory;
 
-import characters.*;
+import characters.Student;
 
-public class StudentFactory {
+public abstract class StudentFactory {
 
-    public static Student createStudent(String type) {
-        switch (type.toUpperCase()) {
-            case "LARRY":
-                return new LarryPotter();
-            case "GRYFFINDOR":
-                return new GriffendorStudent();
-            case "SLYTHERIN":
-                return new SlytherinStudent();
-            case "RAVENCLAW":
-                return new RavenClawStudent();
-            case "HUFFLEPUFF":
-                return new HufflepuffStudent();
-            default:
-                throw new IllegalArgumentException("Unknown student type");
-        }
+    protected abstract Student createStudent();
+
+    public Student enrollStudent() {
+        Student student = createStudent();
+        System.out.println(student.getName() + " has been enrolled!");
+        return student;
     }
 }

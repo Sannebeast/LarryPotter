@@ -1,4 +1,5 @@
 import characters.*;
+import factory.FactoryProvider;
 import factory.StudentFactory;
 import game.HogwartsGame;
 import spells.Spell;
@@ -30,14 +31,24 @@ public class Main {
         while (playAgain) {
 
             // Choose player
-            System.out.println("\nChoose your student: LARRY, GRYFFINDOR, SLYTHERIN, RAVENCLAW, HUFFLEPUFF");
+            System.out.println(
+                    "\nChoose your student: " +
+                            String.join(", ", FactoryProvider.getAvailableStudents())
+            );
             String playerChoice = scanner.nextLine().toUpperCase();
-            Student player = StudentFactory.createStudent(playerChoice);
+            StudentFactory playerFactory =
+                    FactoryProvider.getFactory(playerChoice);
+            Student player = playerFactory.enrollStudent();
 
             // Choose enemy
-            System.out.println("Choose the enemy student: LARRY, GRYFFINDOR, SLYTHERIN, RAVENCLAW, HUFFLEPUFF");
+            System.out.println(
+                    "\nChoose the enemy: " +
+                            String.join(", ", FactoryProvider.getAvailableStudents())
+            );
             String enemyChoice = scanner.nextLine().toUpperCase();
-            Student enemy = StudentFactory.createStudent(enemyChoice);
+            StudentFactory enemyFactory =
+                    FactoryProvider.getFactory(enemyChoice);
+            Student enemy = enemyFactory.enrollStudent();
 
             // Create spells
             Spell fireball = new SpellAdapter("Fireball");            // Adapter
