@@ -1,4 +1,5 @@
 import characters.*;
+import factory.FactoryProvider;
 import factory.StudentFactory;
 import game.HogwartsGame;
 import spells.Spell;
@@ -30,14 +31,24 @@ public class Main {
         while (playAgain) {
 
             // Choose player
-            System.out.println("\nChoose your student: LARRY, GRYFFINDOR, SLYTHERIN, RAVENCLAW, HUFFLEPUFF");
+            System.out.println(
+                    "\nChoose your student: " +
+                            String.join(", ", FactoryProvider.getAvailableStudents())
+            );
             String playerChoice = scanner.nextLine().toUpperCase();
-            Student player = StudentFactory.createStudent(playerChoice);
+            StudentFactory playerFactory =
+                    FactoryProvider.getFactory(playerChoice);
+            Student player = playerFactory.enrollStudent();
 
             // Choose enemy
-            System.out.println("Choose the enemy student: LARRY, GRYFFINDOR, SLYTHERIN, RAVENCLAW, HUFFLEPUFF");
+            System.out.println(
+                    "\nChoose the enemy: " +
+                            String.join(", ", FactoryProvider.getAvailableStudents())
+            );
             String enemyChoice = scanner.nextLine().toUpperCase();
-            Student enemy = StudentFactory.createStudent(enemyChoice);
+            StudentFactory enemyFactory =
+                    FactoryProvider.getFactory(enemyChoice);
+            Student enemy = enemyFactory.enrollStudent();
 
             // Create spells
             Spell fireball = new SpellAdapter("Fireball");            // Adapter
@@ -65,8 +76,8 @@ public class Main {
 
                 switch(action) {
                     case 1 -> {
-                        player.attack(enemy);
                         game.performDuel(player, enemy, "Basic attack");
+                        player.attack(enemy);
                         printHealth(player, enemy);
                     }
                     case 2 -> {
@@ -95,13 +106,13 @@ public class Main {
                 int enemyAction = rand.nextInt(3); // 0: attack, 1: fireball, 2: heal
                 switch(enemyAction) {
                     case 0 -> {
+                        game.performDuel(enemy, player,"Basic attack");
                         enemy.attack(player);
-                        game.performDuel(player, enemy, "Basic attack");
                         printHealth(player, enemy);
                     }
                     case 1 -> {
                         fireball.cast();
-                        game.performDuel(player, enemy, "Fireball");
+                        game.performDuel(enemy, player,"Fireball");
                         player.takeDamage(20);
                         printHealth(player, enemy);
                     }
